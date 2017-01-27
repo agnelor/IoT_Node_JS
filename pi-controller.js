@@ -18,7 +18,7 @@ app.use(express.static("./"));
 app.get('/', function (request, response) {
 	
     // Note: __dirname is directory that contains the JavaScript source code. 
-	res.sendFile(__dirname + '/controller.html')
+	response.sendFile(__dirname + '/controller.html')
 })
 
 app.get("/light/:text", function(request,response) {
