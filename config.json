@@ -1,4 +1,5 @@
 {
 	"port": 80,
-	"host": "0.0.0.0"
+	"host": "0.0.0.0",
+	"mqtt_server":"mqtt://ec2-35-165-53-51.us-west-2.compute.amazonaws.com:1883"
 }

@@ -5,26 +5,25 @@ var express = require("express");
 
 console.log("Starting");
 var config = JSON.parse(fs.readFileSync("config.json"));
+
 var host = config.host;
 var port = config.port;
-
-var mqtt_server="mqtt://ec2-35-165-53-51.us-west-2.compute.amazonaws.com:1883";
+var mqtt_server=config.mqtt_server;
 
 var client = mqtt.connect(mqtt_server)
 var app = express();
 
-app.use(express.static("./"));
+app.use(express.static("./app"));
 
 app.get('/', function (request, response) {
-	
+
     // Note: __dirname is directory that contains the JavaScript source code. 
-	response.sendFile(__dirname + '/controller.html')
+	response.sendFile(__dirname + '/app/controller.html')
 })
 
 app.get("/light/:text", function(request,response) {
 	
-	
-	
+
 	
 	client.publish('iot', 'Home/Hall/Light/' + request.params.text)	
 	
