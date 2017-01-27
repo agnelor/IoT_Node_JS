@@ -7,7 +7,7 @@ console.log("Starting web server");
 var server = http.createServer(function(request, response){
 	console.log("Received a request: " + request.url);
 	
-	fs.readFile("./public" + request.url, function(error, data) {
+	fs.readFile("./" + request.url, function(error, data) {
 		if (error) {
 			response.writeHead(404, {"Content-Type": "text/plain"});
 			response.end("Page not found");
