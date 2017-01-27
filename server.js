@@ -1,8 +1,8 @@
 var fs = require("fs");
 var mqtt = require('mqtt')
 var express = require("express");
-var bodyParser  = require('body-parser');
-var morgan      = require('morgan');
+//var bodyParser  = require('body-parser');
+//var morgan      = require('morgan');
 
 
 var config = JSON.parse(fs.readFileSync("config.json"));
@@ -16,13 +16,13 @@ var app = express();
 
 
 // use body parser so we can get info from POST and/or URL parameters
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
 
 app.use(express.static("./app"));
 
 // use morgan to log requests to the console
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 
 
 app.get('/', function (request, response) {
@@ -46,7 +46,9 @@ app.get("/alarm/:text", function(request,response) {
 	response.end();	
 });
 
-app.listen(port,host);
+app.listen(port,host,function() {
+	console.log("Server is now listening " + host + ":" + port);
+});
 
 fs.watchFile("config.json", function() {
 	fs.readFile("config.json", function(error, data) {
