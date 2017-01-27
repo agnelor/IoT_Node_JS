@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 .onoffswitch {
@@ -55,8 +57,7 @@
 function switchlight() {
     if(document.getElementById("switchLight").checked==true)
     {
-            httpGetAsync("light/on");
-            
+            httpGetAsync("light/on");            
     }
     else
     {
@@ -66,12 +67,11 @@ function switchlight() {
 function switchAlarm() {
     if(document.getElementById("switchAlarm").checked==true)
     {
-            httpGetAsync("light/alaram-on");
-            
+            httpGetAsync("alarm/on");            
     }
     else
     {
-            httpGetAsync("light/alaram-off");
+            httpGetAsync("alarm/off");
     }
 }
 
@@ -79,18 +79,20 @@ function httpGetAsync(theUrl, callback)
 {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            callback(xmlHttp.responseText);
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+          //  callback(xmlHttp.responseText);
+        }
     }
-    xmlHttp.open("GET", window.location.protocol+"//"+window.location.hostname+"/" + theUrl, true); // true for asynchronous 
+    xmlHttp.open("GET", window.location.href +  theUrl, true); // true for asynchronous 
     xmlHttp.send(null);
 }
 
 </script>
 
+<div class="container-fluid"> 
  <h3 class="text-center">Home Automation</h3>
 <div class="table-responsive">
-<table class="table table-bordered">
+<table class="table table-hover">
   <tr>
     <td>Switch on Light</td>
     <td>
@@ -114,5 +116,6 @@ function httpGetAsync(theUrl, callback)
 </div></td> 
   </tr>
 </table>
+</div>
 </div>
 </html>
