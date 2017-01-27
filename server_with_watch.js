@@ -1,21 +1,15 @@
 var http = require("http");
 var fs = require("fs");
+
 var config = JSON.parse(fs.readFileSync("config.json"));
 var host = config.host;
 var port = config.port;
 console.log("Starting web server");
+
 var server = http.createServer(function(request, response){
 	console.log("Received a request: " + request.url);
 	
-	fs.readFile("./" + request.url, function(error, data) {
-		if (error) {
-			response.writeHead(404, {"Content-Type": "text/plain"});
-			response.end("Page not found");
-		} else {
-			response.writeHead(200, {"Content-Type": "text/html"});
-			response.end(data);
-		}
-	});
+	res.sendFile(__dirname + '/controller.html')
 });
 server.listen(port, host, function() {
 	console.log("Server is listening " + host + ":" + port);
