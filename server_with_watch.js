@@ -9,7 +9,16 @@ console.log("Starting web server");
 var server = http.createServer(function(request, response){
 	console.log("Received a request: " + request.url);
 	
-	res.sendFile(__dirname + '/controller.html')
+	fs.readFile("./" + request.url, function(error, data) {
+                if (error) {
+                        response.writeHead(404, {"Content-Type": "text/plain"});
+                        response.end("Page not found");
+                } else {
+                        response.writeHead(200, {"Content-Type": "text/html"});
+                        response.end(data);
+                }
+    });
+
 });
 server.listen(port, host, function() {
 	console.log("Server is listening " + host + ":" + port);
